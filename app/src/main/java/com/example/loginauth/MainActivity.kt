@@ -3,14 +3,7 @@ package com.example.loginauth
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.loginauth.app.PostOfficeApp
+import com.example.loginauth.app.LoginAuthApp
 import com.example.loginauth.ui.theme.LoginAuthTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +12,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LoginAuthTheme {
                 // A surface container using the 'background' color from the theme
-                PostOfficeApp()
+                LoginAuthApp()
             }
         }
     }
