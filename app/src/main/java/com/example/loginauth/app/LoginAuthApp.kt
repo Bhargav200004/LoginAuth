@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.loginauth.navigation.LoginAuthRouter
 import com.example.loginauth.navigation.Screen
+import com.example.loginauth.screen.LoginScreen
 import com.example.loginauth.screen.SignUpScreen
 import com.example.loginauth.screen.TermsAndConditionScreen
 
@@ -25,6 +26,10 @@ fun LoginAuthApp() {
                 }
                 Screen.TermAndConditionScreen -> {
                     TermsAndConditionScreen()
+                }
+
+                Screen.LoginScreen -> {
+                    LoginScreen()
                 }
             }
 
