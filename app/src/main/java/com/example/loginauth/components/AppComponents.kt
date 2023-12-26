@@ -87,7 +87,7 @@ fun HeadingTextComponent(
 }
 
 @Composable
-fun MyTextField(label: String, accountBox: ImageVector) {
+fun MyTextField(label: String, accountBox: ImageVector , onTextChange : (String) -> Unit) {
 
     var textValue by remember { mutableStateOf("") }
 
@@ -96,7 +96,10 @@ fun MyTextField(label: String, accountBox: ImageVector) {
             .fillMaxWidth(),
         shape = RoundedCornerShape(15.dp),
         value = textValue,
-        onValueChange = { textValue = it },
+        onValueChange = {
+            textValue = it
+            onTextChange(it)
+        },
         label = { Text(text = label) },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         singleLine = true,
@@ -108,7 +111,7 @@ fun MyTextField(label: String, accountBox: ImageVector) {
 }
 
 @Composable
-fun PassWordTextField(label: String, accountBox: ImageVector) {
+fun PassWordTextField(label: String, accountBox: ImageVector , onTextChange : (String) -> Unit) {
 
     var passWord by remember { mutableStateOf("") }
 
@@ -121,7 +124,10 @@ fun PassWordTextField(label: String, accountBox: ImageVector) {
             .fillMaxWidth(),
         shape = RoundedCornerShape(15.dp),
         value = passWord,
-        onValueChange = { passWord = it },
+        onValueChange = {
+            passWord = it
+            onTextChange(it)
+        },
         label = { Text(text = label) },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password,
