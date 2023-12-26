@@ -78,4 +78,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
 
     implementation("com.google.firebase:firebase-analytics")
+
+    //viewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 }

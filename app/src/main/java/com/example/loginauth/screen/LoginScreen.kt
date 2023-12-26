@@ -39,9 +39,21 @@ fun LoginScreen() {
             NormalTextComponent(text = "Hey There ,")
             HeadingTextComponent(text = "Welcome back")
             Spacer(modifier = Modifier.height(40.dp))
-            MyTextField(label = "Email", accountBox = Icons.Outlined.Email)
+            MyTextField(
+                label = "Email",
+                accountBox = Icons.Outlined.Email,
+                onTextChange = {
+
+                }
+            )
             Spacer(modifier = Modifier.height(15.dp))
-            PassWordTextField(label = "Password", accountBox = Icons.Outlined.Lock)
+            PassWordTextField(
+                label = "Password",
+                accountBox = Icons.Outlined.Lock,
+                onTextChange = {
+
+                }
+            )
             Spacer(modifier = Modifier.height(20.dp))
             UnderLineTextComponent(text = "Forget Password")
             Spacer(modifier = Modifier.height(40.dp))
