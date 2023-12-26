@@ -78,7 +78,12 @@ fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
                 LoginAuthRouter.navigateTo(Screen.TermAndConditionScreen)
             })
             Spacer(modifier = Modifier.height(30.dp))
-            ButtonComponent(value = "Registration")
+            ButtonComponent(
+                value = "Registration",
+                onButtonClicked = {
+                    loginViewModel.onEvent(UIEvent.RegisterButtonClick)
+                }
+            )
             Spacer(modifier = Modifier.height(20.dp))
             DividerComponent()
             ClickableLoginTextComponent(tryingToLogin = true,onTextSelected = {

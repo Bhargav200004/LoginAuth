@@ -1,5 +1,6 @@
 package com.example.loginauth.data
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -37,12 +38,21 @@ class LoginViewModel : ViewModel() {
                 )
                 printState()
             }
+
+            UIEvent.RegisterButtonClick -> {
+                signUp()
+            }
         }
     }
 
+    private fun signUp() {
+        Log.d(TAG, "SignUp")
+        printState()
+    }
+
     private fun printState() {
-        Log.d("TAG", "UIState")
-        Log.d("TAG", registrationUIState.value.toString())
+        Log.d(TAG, "UIState")
+        Log.d(TAG, registrationUIState.value.toString())
     }
 
 }

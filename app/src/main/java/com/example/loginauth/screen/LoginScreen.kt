@@ -57,7 +57,12 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(20.dp))
             UnderLineTextComponent(text = "Forget Password")
             Spacer(modifier = Modifier.height(40.dp))
-            ButtonComponent(value = "Login")
+            ButtonComponent(
+                value = "Login",
+                onButtonClicked = {
+
+                }
+            )
             Spacer(modifier = Modifier.height(20.dp))
             DividerComponent()
             ClickableLoginTextComponent(tryingToLogin = false ,onTextSelected = {
