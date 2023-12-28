@@ -47,7 +47,8 @@ fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
                 accountBox = Icons.Outlined.AccountBox,
                 onTextChange = {
                     loginViewModel.onEvent(UIEvent.FirstNameChange(firstName = it))
-                }
+                },
+                errorState = loginViewModel.registrationUIState.value.firstNameError
             )
             Spacer(modifier = Modifier.height(10.dp))
             MyTextField(
@@ -55,7 +56,8 @@ fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
                 accountBox = Icons.Outlined.AccountBox,
                 onTextChange = {
                     loginViewModel.onEvent(UIEvent.LastNameChange(lastName = it))
-                }
+                },
+                errorState = loginViewModel.registrationUIState.value.lastNameError
             )
             Spacer(modifier = Modifier.height(10.dp))
             MyTextField(
@@ -63,7 +65,8 @@ fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
                 accountBox = Icons.Outlined.Email,
                 onTextChange = {
                     loginViewModel.onEvent(UIEvent.EmailChange(email = it))
-                }
+                },
+                errorState = loginViewModel.registrationUIState.value.emailError
             )
             Spacer(modifier = Modifier.height(10.dp))
             PassWordTextField(
@@ -71,7 +74,8 @@ fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
                 accountBox = Icons.Outlined.Lock,
                 onTextChange = {
                     loginViewModel.onEvent(UIEvent.PasswordChange(password = it))
-                }
+                },
+                errorState = loginViewModel.registrationUIState.value.passwordError
             )
             Spacer(modifier = Modifier.height(10.dp))
             CheckBoxComponent(value = "" , onTextSelected = {

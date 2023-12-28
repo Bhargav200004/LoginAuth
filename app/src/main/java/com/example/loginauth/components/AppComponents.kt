@@ -87,7 +87,7 @@ fun HeadingTextComponent(
 }
 
 @Composable
-fun MyTextField(label: String, accountBox: ImageVector , onTextChange : (String) -> Unit) {
+fun MyTextField(label: String, accountBox: ImageVector , onTextChange : (String) -> Unit,errorState : Boolean =false ) {
 
     var textValue by remember { mutableStateOf("") }
 
@@ -106,12 +106,13 @@ fun MyTextField(label: String, accountBox: ImageVector , onTextChange : (String)
         maxLines = 1,
         leadingIcon = {
             Icon(imageVector = accountBox, contentDescription = "")
-        }
+        },
+        isError = !errorState
     )
 }
 
 @Composable
-fun PassWordTextField(label: String, accountBox: ImageVector , onTextChange : (String) -> Unit) {
+fun PassWordTextField(label: String, accountBox: ImageVector , onTextChange : (String) -> Unit , errorState: Boolean = false) {
 
     var passWord by remember { mutableStateOf("") }
 
@@ -159,6 +160,7 @@ fun PassWordTextField(label: String, accountBox: ImageVector , onTextChange : (S
                 }
             }
         },
+        isError = !errorState,
         visualTransformation = if (passWordVisible) VisualTransformation.None
         else PasswordVisualTransformation()
     )
