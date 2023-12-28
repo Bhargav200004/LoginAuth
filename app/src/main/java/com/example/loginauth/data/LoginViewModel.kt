@@ -6,10 +6,13 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.loginauth.data.rules.Validator
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginViewModel : ViewModel() {
 
     var registrationUIState = mutableStateOf(RegistrationUiState())
+
+    var allValidationPass = mutableStateOf(false)
 
     fun onEvent(event: UIEvent) {
         validatorWithRule()
@@ -45,6 +48,12 @@ class LoginViewModel : ViewModel() {
             UIEvent.RegisterButtonClick -> {
                 signUp()
             }
+
+            is UIEvent.PrivacyPolicyCheckBoxClicked -> {
+                registrationUIState.value = registrationUIState.value.copy(
+                    privacyPolicyAccepted = event.status
+                )
+            }
         }
     }
 
@@ -52,7 +61,11 @@ class LoginViewModel : ViewModel() {
         Log.d(TAG, "SignUp")
         printState()
 
-        validatorWithRule()
+        createUserInFireBase(
+            email = registrationUIState.value.email,
+            password = registrationUIState.value.password
+        )
+
     }
 
     private fun validatorWithRule() {
@@ -72,6 +85,10 @@ class LoginViewModel : ViewModel() {
             password = registrationUIState.value.password
         )
 
+        val privacyPolicyResult = Validator.validatePrivacyPolicyAcceptance(
+            statusValue = registrationUIState.value.privacyPolicyAccepted
+        )
+
         Log.d(TAG, "fNameResult = $fNameResult")
         Log.d(TAG, "lNameResult = $lNameResult")
         Log.d(TAG, "emailResult = $emailResult")
@@ -81,8 +98,11 @@ class LoginViewModel : ViewModel() {
             firstNameError = fNameResult.status,
             lastNameError = lNameResult.status ,
             emailError = emailResult.status ,
-            passwordError = passwordResult.status
+            passwordError = passwordResult.status,
+            privacyError = privacyPolicyResult.status
         )
+
+        allValidationPass.value = fNameResult.status && lNameResult.status && emailResult.status && passwordResult.status && !privacyPolicyResult.status
 
 
     }
@@ -91,5 +111,19 @@ class LoginViewModel : ViewModel() {
     private fun printState() {
         Log.d(TAG, "UIState")
         Log.d(TAG, registrationUIState.value.toString ())
+    }
+
+    private fun createUserInFireBase(email : String , password : String){
+        FirebaseAuth
+            .getInstance()
+            .createUserWithEmailAndPassword(email,password)
+            .addOnCompleteListener{
+                Log.d(TAG,"Inside_OnCompleteListener")
+                Log.d(TAG,"${it.isSuccessful}")
+            }
+            .addOnFailureListener{
+                Log.d(TAG,"Inside_OnFailureListener")
+                Log.d(TAG,"${it.message}")
+            }
     }
 }

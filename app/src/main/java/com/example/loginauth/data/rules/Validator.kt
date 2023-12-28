@@ -24,6 +24,12 @@ object Validator {
             (!password.isNullOrEmpty() && password.length  >= 4)
         )
     }
+
+    fun validatePrivacyPolicyAcceptance(statusValue: Boolean) : Validate{
+        return Validate(
+            statusValue
+        )
+    }
 }
 
 data class Validate(

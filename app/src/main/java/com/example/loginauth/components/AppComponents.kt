@@ -167,7 +167,7 @@ fun PassWordTextField(label: String, accountBox: ImageVector , onTextChange : (S
 }
 
 @Composable
-fun CheckBoxComponent(value: String, onTextSelected: (String) -> Unit) {
+fun CheckBoxComponent(value: String, onTextSelected: (String) -> Unit , onCheckChange : (Boolean) -> Unit) {
 
     var checkedState by remember { mutableStateOf(false) }
 
@@ -181,6 +181,7 @@ fun CheckBoxComponent(value: String, onTextSelected: (String) -> Unit) {
             checked = checkedState,
             onCheckedChange = {
                 checkedState = !checkedState
+                onCheckChange.invoke(it)
             }
         )
 
@@ -229,14 +230,15 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 
 
 @Composable
-fun ButtonComponent(value: String , onButtonClicked : () -> Unit) {
+fun ButtonComponent(value: String , onButtonClicked : () -> Unit , isEnable: Boolean = false) {
     Button(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),
         onClick = { onButtonClicked.invoke() },
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(Color.Transparent)
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        enabled = isEnable
     ) {
 
         Box(

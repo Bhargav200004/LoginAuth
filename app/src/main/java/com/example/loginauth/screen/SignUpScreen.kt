@@ -29,7 +29,7 @@ import com.example.loginauth.navigation.LoginAuthRouter
 import com.example.loginauth.navigation.Screen
 
 @Composable
-fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
+fun SignUpScreen(loginViewModel: LoginViewModel = viewModel()) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -78,22 +78,28 @@ fun SignUpScreen(loginViewModel : LoginViewModel = viewModel()) {
                 errorState = loginViewModel.registrationUIState.value.passwordError
             )
             Spacer(modifier = Modifier.height(10.dp))
-            CheckBoxComponent(value = "" , onTextSelected = {
-                LoginAuthRouter.navigateTo(Screen.TermAndConditionScreen)
-            })
+            CheckBoxComponent(
+                value = "", onTextSelected = {
+                    LoginAuthRouter.navigateTo(Screen.TermAndConditionScreen)
+                },
+                onCheckChange = {
+                    loginViewModel.onEvent(UIEvent.PrivacyPolicyCheckBoxClicked(it))
+                }
+            )
             Spacer(modifier = Modifier.height(30.dp))
             ButtonComponent(
                 value = "Registration",
                 onButtonClicked = {
                     loginViewModel.onEvent(UIEvent.RegisterButtonClick)
-                }
+                },
+                isEnable = loginViewModel.allValidationPass.value
             )
             Spacer(modifier = Modifier.height(20.dp))
             DividerComponent()
-            ClickableLoginTextComponent(tryingToLogin = true,onTextSelected = {
+            ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
                 LoginAuthRouter.navigateTo(Screen.LoginScreen)
             })
         }
-        
+
     }
 }
