@@ -12,6 +12,8 @@ sealed class Screen(){
 
     data object LoginScreen : Screen()
 
+    data object HomeScreen : Screen()
+
 }
 
 
